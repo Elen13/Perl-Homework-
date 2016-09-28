@@ -1,0 +1,27 @@
+итого;298988
+drwxr-xr-x;2;elena;elena;4096;апр.;2;2015;allgroups
+drwxrwxr-x;2;elena;elena;4096;дек.;8;2015;deja-dup
+drwxr-xr-x;2;elena;elena;4096;апр.;2;2015;desktop
+drwxr-xr-x;3;elena;elena;4096;июня;1;22:18;documents
+drwxr-xr-x;2;elena;elena;4096;сент.;26;20:05;downloads
+-rw-rw-r--;1;elena;elena;256968893;сент.;9;12:55;eclipse-jee-kepler-R-linux-gtk-x86_64.tar.gz
+-rw-r--r--;1;elena;elena;259;апр.;2;2015;examples.desktop
+drwxr-xr-x;2;elena;elena;4096;сент.;22;21:15;images
+drwxrwxr-x;6;elena;elena;4096;сент.;9;16:52;install
+drwxrwxr-x;5;elena;elena;4096;сент.;17;21:20;JP
+-rw-rw-r--;1;elena;elena;7417816;сент.;22;21:23;lab1.zip.tmp
+-rw-rw-r--;1;elena;elena;7417816;сент.;22;21:24;lab1.zip.tmp1
+-rw-rw-r--;1;elena;elena;34257647;сент.;22;21:24;lab1.zip.tmp2
+-rw-rw-r--;1;elena;elena;93;дек.;25;2015;lesso1.html~
+drwx------;8;elena;elena;4096;марта;28;2015;lforu
+drwx------;2;elena;elena;4096;марта;20;2015;logisim
+drwxr-xr-x;2;elena;elena;4096;апр.;2;2015;music
+drwxrwxrwx;8;elena;elena;4096;дек.;12;2015;Qt
+-rw-rw-r--;1;elena;elena;4990;мая;20;2015;savefile.plt
+drwxr-xr-x;2;elena;elena;4096;апр.;2;2015;templates
+-rw-rw-r--;1;elena;elena;1318;мая;20;2015;testResults.dat
+-rw-rw-r--;1;elena;elena;0;мая;20;2015;testResults.dat~
+-rw-rw-r--;1;elena;elena;334;мая;20;2015;time.dat
+-rw-rw-r--;1;elena;elena;344;мая;20;2015;time.dat~
+drwxr-xr-x;2;elena;elena;4096;апр.;2;2015;video
+drwxrwxr-x;5;elena;elena;4096;дек.;12;2015;VirtualBox\ VMs

@@ -1,0 +1,22 @@
+#------------------3	my ($rule, $colR, $uName, $gName, $sizeF, $time1, $time2, $time3, $name) = split(/;/);
+#------------------1
+#ls -l | perl -lne '@F = split(/\s+/,$_,9); print join(";",@F)'
+#ls -l >res1
+
+#cat res1 | perl -nl00730012 -ne 'print $_;'
+#ls -l | perl -nal00730012 -ne 'print $_;' >res2
+#echo ---------------------------------------------
+#cat res2 | perl -lnaF';' -e '{ print $F[0] };'
+
+#ls -l | perl -lape '$_ = $F[1]'
+
+
+#ls -l | perl -lane 'print join(";",@F)'
+#------------------2
+#cat resFin1 | perl -laF';' -e 'while(<>){if( $F[4] > 100 ){ $col+=1; print $F[8];};} print $size = @F' #>1000000
+
+@array = ("one", "two", "three");  
+ 
+foreach $element (@array) {  
+     print "Current element = $element\n";  
+} 
