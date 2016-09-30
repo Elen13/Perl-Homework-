@@ -1,6 +1,3 @@
-cat resFin1 | perl -e 'while(<>){@F = split(/;/,$_); if( $F[4] > 1000000 ){ $col+=1; print $F[8];}} print "Total count of string: $., count of result string: $col\n";'> resFin2
+cat resFin1 | perl -e 'while(<>){@F = split(/;/,$_); if( $F[4] > 1048576 ){ $col+=1; print $F[8];}} print "Total count of string: $., count of result string: $col\n";'> resFin2
 
-
-
-cat resFin1 | perl -e 'while(<>){@F = split(/;/,$_); if( $F[4] > 1000000 ){ $col+=1; print $F[8];}} print "Total count of string: $., count of result string: $col\n";'
 #Результат колонки в байтах 1Мб = 1000000 байт

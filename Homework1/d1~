@@ -1,2 +1,6 @@
-echo Hello!
-ls -l | perl -lne '@F = split(/\s+/,$_,9); print join(";",@F)'> resFin1
+ls -l | perl -lne 'if($. != 1) {@F = split(/\s+/,$_,9); print join(";",@F)}'
+
+
+
+#ls -l | perl -lne 'if($. != 1) {@F = split(/\s+/,$_,9);} print join(";",@F)'
+#> resFin1
