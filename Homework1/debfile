@@ -1,0 +1,29 @@
+l
+w @temp
+n
+n
+n
+n
+b 6 $i == 7
+c
+b 3
+c
+l
+print $i
+n
+r
+l
+n
+!
+print $i
+n
+L
+W *
+c
+r
+c
+print $i
+B *
+L
+c
+#save debfile
