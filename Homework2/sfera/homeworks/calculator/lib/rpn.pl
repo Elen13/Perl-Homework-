@@ -21,6 +21,34 @@ no warnings 'experimental';
 use FindBin;
 require "$FindBin::Bin/../lib/tokenize.pl";
 
+sub pushElLeft{
+	my ($p, $t, $h, $char) = @_;
+	my $ch = $#$t;
+	my $pri = ${$h}{$char};
+	if ($#$t != -1){
+		while($ch > -1 && $pri <= ${$h}{${$t}[$ch]}){
+			push @$p, ${$t}[$ch];
+			pop @$t; 
+			$ch  = $#$t;
+		}}
+	push @$t, $char;
+	1;
+}
+
+sub pushElRight{
+	my ($p, $t, $h, $char) = @_;
+	my $ch = $#$t;
+	my $pri = ${$h}{$char};
+	if ($#$t != -1){
+		while($ch > -1 && $pri < ${$h}{${$t}[$ch]}){
+			push @$p, ${$t}[$ch];
+			pop @$t; 
+			$ch  = $#$t;
+		}}
+	push @$t, $char;
+	1;
+}
+
 sub rpn {
 	my $expr = shift;
 	my $source = tokenize($expr);
@@ -31,55 +59,30 @@ my @chars =  @$source;
 my @pol;
 my @tmp;
 my %hash = ("U\+" => 4, "U\-" => 4, "^" => 3, "*" => 2, "/" => 2, "+" => 1, "-" => 1, "(" => 0, ")" => 0);
+my $pref = \@pol;
+my $tref = \@tmp;
+my $href = \%hash;
 
 for (my $i=0; $i < scalar(@chars); $i++){
 	given ($chars[$i]) {
 		when (/\d+|\d+\.\d+/) { push @pol, $chars[$i]; }
+
 		when (/\(/) { push @tmp, $chars[$i]; }
-		when (/^(\+|\-)/) {my $ch = $#tmp;
-				my $pri = $hash{$chars[$i]};
-				if ($#tmp != -1){
-				while($pri <= $hash{$tmp[$ch]} && $ch > -1){
-					push @pol, $tmp[$ch];
-					pop @tmp;
-					$ch  = $#tmp;
-				}}
-				push @tmp, $chars[$i];
-			       } 
-		when (/\*|\//) { my $ch = $#tmp;
-				my $pri = $hash{$chars[$i]};
-				if ($#tmp != -1){
-				while($pri <= $hash{$tmp[$ch]} && $ch > -1){
-					push @pol, $tmp[$ch];
-					pop @tmp;
-					$ch  = $#tmp;
-				}}
-				push @tmp, $chars[$i];
-			     }
-		when (/\^/) { my $ch = $#tmp;
-				my $pri = $hash{$chars[$i]};
-				if ($#tmp != -1){
-				while($pri < $hash{$tmp[$ch]} && $ch > -1){
-					push @pol, $tmp[$ch];
-					pop @tmp;
-					$ch  = $#tmp;
-				}}
-				push @tmp, $chars[$i];
-			    } 
-		when (/U\+|U\-/) { my $ch = $#tmp;
-				my $pri = $hash{$chars[$i]};
-				if ($#tmp != -1){
-				while($pri < $hash{$tmp[$ch]} && $ch > -1){
-					push @pol, $tmp[$ch];
-					pop @tmp;
-					$ch  = $#tmp;
-				}}
-				push @tmp, $chars[$i];
-				}
-		when (/\)/) { for (my $j = $#tmp; $j >= 0; $j--){
+
+		when (/^(\+|\-)/) {pushElLeft($pref, $tref, $href,$chars[$i]);}
+ 
+		when (/\*|\//) { pushElLeft($pref, $tref, $href,$chars[$i]); }
+
+		when (/\^/) { pushElRight($pref, $tref, $href,$chars[$i]);} 
+
+		when (/U\+|U\-/) { pushElRight($pref, $tref, $href,$chars[$i]);}
+
+		when (/\)/) { for (my $j = $#tmp; $j >= 0;){
 				if( $tmp[$j] ne "(") {
 					push @pol, $tmp[$j];
-					pop @tmp; }
+					pop @tmp;
+					$j = $#tmp; }
+				else{ $j--; }
 				if ($tmp[$j] eq "("){last;}
 			      }
 				pop @tmp;

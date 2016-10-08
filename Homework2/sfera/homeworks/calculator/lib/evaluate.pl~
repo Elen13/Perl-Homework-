@@ -31,7 +31,7 @@ for (my $i=0; $i < scalar(@pol); $i++){
 				my $x = pop @res;
 				$x = 0 + $x;
 				push @res, $x;}
-			     else { if($pol[$i] eq "U\-"){
+			    	 else { if($pol[$i] eq "U\-"){
 					my $x = pop @res;
 					$x = 0 - $x;
 					push @res, $x;}

@@ -36,20 +36,20 @@ for (my $i=0; $i < scalar(@chars); $i++){
 	given ($chars[$i]) {
 		when (/\d+|\d+\.\d+/) { push @pol, $chars[$i]; }
 		when (/\(/) { push @tmp, $chars[$i]; }
-		when (/^(\+|\-)/) {my $ch = scalar @tmp;
+		when (/^(\+|\-)/) {my $ch = $#tmp;
 				my $pri = $hash{$chars[$i]};
 				if ($#tmp != -1){
-				while($pri <= $hash{$tmp[$ch-1]} && $ch > 0){
-					push @pol, $tmp[$ch-1];
+				while($ch > -1 && $pri <= $hash{$tmp[$ch]}){
+					push @pol, $tmp[$ch];
 					pop @tmp;
-					$ch  = scalar @tmp;
+					$ch  = $#tmp;
 				}}
 				push @tmp, $chars[$i];
 			       } 
 		when (/\*|\//) { my $ch = $#tmp;
 				my $pri = $hash{$chars[$i]};
 				if ($#tmp != -1){
-				while($pri <= $hash{$tmp[$ch]} && $ch > -1){
+				while($ch > -1 && $pri <= $hash{$tmp[$ch]}){
 					push @pol, $tmp[$ch];
 					pop @tmp;
 					$ch  = $#tmp;
@@ -59,7 +59,7 @@ for (my $i=0; $i < scalar(@chars); $i++){
 		when (/\^/) { my $ch = $#tmp;
 				my $pri = $hash{$chars[$i]};
 				if ($#tmp != -1){
-				while($pri < $hash{$tmp[$ch]} && $ch > -1){
+				while($ch > -1 && $pri < $hash{$tmp[$ch]}){
 					push @pol, $tmp[$ch];
 					pop @tmp;
 					$ch  = $#tmp;
@@ -69,17 +69,19 @@ for (my $i=0; $i < scalar(@chars); $i++){
 		when (/U\+|U\-/) { my $ch = $#tmp;
 				my $pri = $hash{$chars[$i]};
 				if ($#tmp != -1){
-				while($pri < $hash{$tmp[$ch]} && $ch > -1){
+				while($ch > -1 && $pri < $hash{$tmp[$ch]}){
 					push @pol, $tmp[$ch];
 					pop @tmp;
 					$ch  = $#tmp;
 				}}
 				push @tmp, $chars[$i];
 				}
-		when (/\)/) { for (my $j = $#tmp; $j >= 0; $j--){
+		when (/\)/) { for (my $j = $#tmp; $j >= 0;){
 				if( $tmp[$j] ne "(") {
 					push @pol, $tmp[$j];
-					pop @tmp; }
+					pop @tmp;
+					$j = $#tmp; }
+				else{ $j--; }
 				if ($tmp[$j] eq "("){last;}
 			      }
 				pop @tmp;
