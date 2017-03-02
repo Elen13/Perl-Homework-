@@ -50,11 +50,6 @@ sub decode {
     my ($encoded_str, $key) = @_;
     my $str = '';
 
-	my @ascii_character_numbers = unpack("C*", $encoded_str);
-	for(my $i = 0; $i <= $#ascii_character_numbers; $i++){
-		$ascii_character_numbers[$i] = ($ascii_character_numbers[$i] - $key + 127) % 127;
-	}
-	$str = pack("C*", @ascii_character_numbers);
     # ...
     # Алгоритм дешифрования
     # ...
