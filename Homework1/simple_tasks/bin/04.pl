@@ -26,10 +26,16 @@ run(6) - печатает "1\n"
 sub run {
     my ($x) = @_;
     my $num = 0;
-	my $xx = 0;
-	$xx = sprintf('%032b', $x);
-	$xx = reverse($xx);
-	$num = index($xx, '1');
+
+#	my $xx = 0;
+#	$xx = sprintf('%032b', $x);
+#	$xx = reverse($xx);
+#	$num = index($xx, '1');
+
+	while (($x & 1) != 1) {
+	    $num++;
+	    $x = $x >> 1;
+	}
     # ...
     # Вычисление номера первого ненулевого бита 
     # ...

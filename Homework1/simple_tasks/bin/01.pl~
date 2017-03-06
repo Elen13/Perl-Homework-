@@ -38,7 +38,7 @@ sub run {
 	my $D = 0;
 	my $den = 2 * $a_value;
 	$D = $b_value**2 - 4 * $a_value * $c_value;
-	#print "D = $D\n";
+
 	if($a_value == 0) { print "No solution!\n"; }
 	elsif($D > 0){
 		$x1 = (-$b_value + sqrt($D)) / $den;

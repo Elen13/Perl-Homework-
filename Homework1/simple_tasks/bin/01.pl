@@ -36,21 +36,23 @@ sub run {
     #Вычисление корней
     #...
 	my $D = 0;
-	my $den = 2 * $a_value;
-	$D = $b_value**2 - 4 * $a_value * $c_value;
-
 	if($a_value == 0) { print "No solution!\n"; }
-	elsif($D > 0){
-		$x1 = (-$b_value + sqrt($D)) / $den;
-		$x2 = (-$b_value - sqrt($D)) / $den;
-		print "$x1, $x2\n";
-	}
-	elsif($D == 0){
-		$x1 = $x2 = (-$b_value) / $den;
-		print "$x1, $x2\n";
-	}
-	elsif($D < 0){
-		print "No solution!\n";
+	else{
+		my $den = 2 * $a_value;
+		$D = $b_value**2 - 4 * $a_value * $c_value;
+
+		if($D > 0){
+			$x1 = (-$b_value + sqrt($D)) / $den;
+			$x2 = (-$b_value - sqrt($D)) / $den;
+			print "$x1, $x2\n";
+		}
+		elsif($D == 0){
+			$x1 = $x2 = (-$b_value) / $den;
+			print "$x1, $x2\n";
+		}
+		elsif($D < 0){
+			print "No solution!\n";
+		}
 	}
 
 }
